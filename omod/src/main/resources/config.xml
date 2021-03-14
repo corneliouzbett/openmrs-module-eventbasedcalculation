@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module configVersion="1.6">
+	
+	<!-- Base Module Properties -->
+	<id>${project.parent.artifactId}</id>
+	<name>${project.parent.name}</name>
+	<version>${project.parent.version}</version>
+	<package>org.openmrs.module.eventbasedcalculation</package>
+	<author>corneliouzbett</author>
+	<description>${project.parent.description}</description>
+
+	<activator>org.openmrs.module.eventbasedcalculation.EventbasedcalculationActivator</activator>
+	
+	<!-- <updateURL>https://modules.openmrs.org/modules/download/@MODULE_ID@/update.rdf</updateURL> -->
+	<!-- /Base Module Properties -->
+
+	<require_version>2.0.5 - 2.*</require_version>
+
+	<aware_of_modules>
+		<aware_of_module>org.openmrs.module.legacyui</aware_of_module>
+	</aware_of_modules>
+
+	<require_modules>
+		<require_module>org.openmrs.event</require_module>
+		<require_module>org.openmrs.calculation</require_module>
+		<require_module>org.openmrs.module.fhir2</require_module>
+		<require_module>org.openmrs.module.reporting</require_module>
+	</require_modules>
+	
+	<!-- Internationalization -->
+	<!-- All message codes should start with @MODULE_ID@.* -->
+	<messages>
+		<lang>en</lang>
+		<file>messages.properties</file>
+	</messages>
+	<messages>
+		<lang>fr</lang>
+		<file>messages_fr.properties</file>
+	</messages>
+	<messages>
+		<lang>es</lang>
+		<file>messages_es.properties</file>
+	</messages>
+	<!-- /Internationalization -->
+
+
+	<globalProperty>
+		<property>eventbasedcalculation.conceptUUID.viralLoad</property>
+		<defaultValue>856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</defaultValue>
+		<description>HIV Viral Load count concept UUID</description>
+	</globalProperty>
+	
+</module>
+
