@@ -1,11 +1,20 @@
 package org.openmrs.module.eventbasedcalculation.flags;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import org.openmrs.Auditable;
+import org.openmrs.OpenmrsObject;
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
-public @interface PatientFlag {
+import java.util.Collection;
+
+/**
+ * Marker interface
+ */
+public interface PatientFlag<W extends Auditable & OpenmrsObject> {
+
+    void evaluate(W openMrsObject);
+
+    void evaluate(Collection<W> wCollection);
+
+    void createFlag(Integer patientId);
+
+    void createFlag(Collection<Integer> cohort);
 }

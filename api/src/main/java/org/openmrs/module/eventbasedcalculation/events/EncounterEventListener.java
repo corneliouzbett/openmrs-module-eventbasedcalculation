@@ -17,7 +17,8 @@ import org.openmrs.api.context.Context;
 import org.openmrs.api.context.Daemon;
 import org.openmrs.event.EventListener;
 import org.openmrs.module.DaemonToken;
-import org.openmrs.module.eventbasedcalculation.flags.PatientFlagProcessor;
+import org.openmrs.module.eventbasedcalculation.api.FlagProcessingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.jms.JMSException;
@@ -34,11 +35,11 @@ public class EncounterEventListener implements EventListener {
 
     private DaemonToken daemonToken;
 
-    private PatientFlagProcessor patientFlagProcessor;
+    @Autowired
+    private FlagProcessingService<Encounter> processingService;
 
     public EncounterEventListener(DaemonToken daemonToken) {
         this.daemonToken = daemonToken;
-        patientFlagProcessor = new PatientFlagProcessor();
         this.encounterService = Context.getEncounterService();
     }
 
@@ -61,6 +62,6 @@ public class EncounterEventListener implements EventListener {
         Encounter encounter = encounterService.getEncounterByUuid(encounterUuid);
         log.error("Parsed Encounter created:  {} ", encounter.toString());
 
-        patientFlagProcessor.processFlags(encounter);
+        processingService.processFlags(encounter);
     }
 }

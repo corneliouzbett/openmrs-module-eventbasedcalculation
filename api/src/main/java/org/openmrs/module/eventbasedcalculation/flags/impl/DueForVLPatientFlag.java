@@ -4,23 +4,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.openmrs.Encounter;
 import org.openmrs.Obs;
 import org.openmrs.Patient;
-import org.openmrs.calculation.result.CalculationResult;
-import org.openmrs.calculation.result.CalculationResultMap;
-import org.openmrs.module.eventbasedcalculation.calculation.LastViralCountCalculation;
 import org.openmrs.module.eventbasedcalculation.flags.OpenMrsPatientFlag;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.Set;
 
 @Slf4j
 @Component
 public class DueForVLPatientFlag extends BasePatientFlag implements OpenMrsPatientFlag<Encounter> {
-
-    @Autowired
-    private LastViralCountCalculation viralCountCalculation;
 
     @Override
     public String getName() {
@@ -33,12 +25,12 @@ public class DueForVLPatientFlag extends BasePatientFlag implements OpenMrsPatie
     }
 
     @Override
-    public boolean isActive() {
+    public boolean isEnabled() {
         return false;
     }
 
     @Override
-    public boolean evaluate(Encounter encounter) {
+    public void evaluate(Encounter encounter) {
         log.error("Evaluating patient flag : {}", getName());
 
         // Get the affected patient, encounter, with all obs
@@ -47,18 +39,6 @@ public class DueForVLPatientFlag extends BasePatientFlag implements OpenMrsPatie
 
         // Get the Obs being created
         obsSet.forEach(this::handleViralLoad);
-
-        CalculationResultMap resultMap = viralCountCalculation.evaluate(Collections.singleton(patient.getPatientId()),
-                null, null);
-        if (!resultMap.isEmpty()) {
-            CalculationResult lastVl = resultMap.get(patient.getPatientId());
-            if (!lastVl.isEmpty()) {
-                log.error("Last VL {}", lastVl.getValue().toString());
-            }
-            createFlag(patient);
-        }
-
-        return false;
     }
 
     @Override
@@ -67,12 +47,17 @@ public class DueForVLPatientFlag extends BasePatientFlag implements OpenMrsPatie
     }
 
     @Override
-    public void createFlag(Patient patient) {
+    public void createFlag(Integer patientId) {
 
-        log.error("Creating flag for Patient ID {}", patient.getPatientId());
-        log.error("Creating flag for Patient {}", patient.getPerson().getFamilyName());
+        log.error("Creating flag for Patient ID {}", patientId);
+        log.error("Creating flag for Patient {}", patientId);
 
         // Insert into flags table
+    }
+
+    @Override
+    public void createFlag(Collection<Integer> cohort) {
+        cohort.forEach(this::createFlag);
     }
 
     private void handleViralLoad(Obs obs) {
@@ -80,7 +65,7 @@ public class DueForVLPatientFlag extends BasePatientFlag implements OpenMrsPatie
         if (obs.getConcept().getConceptId().equals(viralLoadConceptId)) {
             Double viralLoadResult = obs.getValueNumeric();
             if (viralLoadResult >= 1000.00) {
-                createFlag(obs.getEncounter().getPatient());
+                createFlag(obs.getEncounter().getPatient().getPatientId());
             }
         }
     }
