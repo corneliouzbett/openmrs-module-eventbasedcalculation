@@ -62,10 +62,10 @@ public class EncounterEventListener implements EventListener {
 
     public void processMessage(Message message) throws JMSException {
         String encounterUuid = ((MapMessage) message).getString("uuid");
-        log.error("Created encounter uuid: {} ", encounterUuid);
+        log.info("Created encounter uuid: {} ", encounterUuid);
 
         Encounter encounter = encounterService.getEncounterByUuid(encounterUuid);
-        log.error("Parsed Encounter created:  {} ", encounter.toString());
+        log.info("Parsed Encounter created:  {} ", encounter.toString());
 
         processingService.processFlags(encounter);
     }

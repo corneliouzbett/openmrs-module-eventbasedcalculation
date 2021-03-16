@@ -69,4 +69,8 @@ public abstract class BasePatientFlag {
         return Context.getService(PatientCalculationService.class).evaluate(cohort, calculation, calculationContext);
     }
 
+//    protected static void createFlag(FhirFlag flag) {
+//
+//    }
+
 }

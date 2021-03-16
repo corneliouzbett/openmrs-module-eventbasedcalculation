@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.openmrs.Auditable;
 import org.openmrs.OpenmrsObject;
+import org.openmrs.module.eventbasedcalculation.flags.impl.AbnormalBloodPressurePatientFlag;
 import org.openmrs.module.eventbasedcalculation.flags.impl.DeceasedPatientFlag;
-import org.openmrs.module.eventbasedcalculation.flags.impl.DueForVLPatientFlag;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
@@ -24,7 +24,7 @@ public class PatientFlagProvider<T extends OpenmrsObject & Auditable> {
     private Map<String, Class<? extends PatientFlag<T>>> flags = new HashMap<>();
 
     public PatientFlagProvider() {
-        this.addFlags(Arrays.asList(new Class[]{DeceasedPatientFlag.class, DueForVLPatientFlag.class}));
+        this.addFlags(Arrays.asList(new Class[]{DeceasedPatientFlag.class, AbnormalBloodPressurePatientFlag.class}));
     }
 
     public void addFlag(Class<? extends PatientFlag<T>> clazz) {
