@@ -20,6 +20,7 @@ import org.openmrs.module.DaemonToken;
 import org.openmrs.module.eventbasedcalculation.api.FlagProcessingService;
 import org.openmrs.module.eventbasedcalculation.api.impl.EncounterFlagProcessingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import javax.jms.JMSException;
@@ -37,6 +38,7 @@ public class EncounterEventListener implements EventListener {
     private DaemonToken daemonToken;
 
     @Autowired
+    @Qualifier("EventBasedCalculation.EncounterFlagProcessingService")
     private FlagProcessingService<Encounter> processingService;
 
     public EncounterEventListener(DaemonToken daemonToken) {
@@ -44,6 +46,7 @@ public class EncounterEventListener implements EventListener {
         this.encounterService = Context.getEncounterService();
 
         if (processingService == null) {
+            log.info("Encounter processing service is NUll");
             this.processingService = new EncounterFlagProcessingServiceImpl();
         }
     }

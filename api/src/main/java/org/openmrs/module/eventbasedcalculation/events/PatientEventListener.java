@@ -49,7 +49,7 @@ public class PatientEventListener implements EventListener {
 
     @Override
     public void onMessage(Message message) {
-        log.error("Patient record updated event");
+        log.info("Patient record updated event");
         Daemon.runInDaemonThread( () -> {
             try {
                 processMessage(message);
@@ -61,13 +61,11 @@ public class PatientEventListener implements EventListener {
 
     private void processMessage(Message message) throws JMSException {
         String patientUuid = ((MapMessage) message).getString("uuid");
-        log.error("Updated patient uuid: {} ", patientUuid);
+        log.info("Updated patient uuid: {} ", patientUuid);
 
         Patient patient = patientService.getPatientByUuid(patientUuid);
-        log.error("Parsed patient updated:  {} ", patient.toString());
+        log.info("Parsed patient updated:  {} ", patient.toString());
 
         this.processingService.processFlags(patient);
-
-        //PatientFlagProvider provider = new PatientFlagProvider();
     }
 }

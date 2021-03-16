@@ -9,23 +9,31 @@
  */
 package org.openmrs.module.eventbasedcalculation.api.impl;
 
+import lombok.extern.slf4j.Slf4j;
 import org.openmrs.Encounter;
 import org.openmrs.Patient;
 import org.openmrs.module.eventbasedcalculation.api.FlagProcessingService;
 import org.openmrs.module.eventbasedcalculation.flags.impl.AbnormalBloodPressurePatientFlag;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
-@Component
+@Slf4j
+@Component("EventBasedCalculation.EncounterFlagProcessingService")
 public class EncounterFlagProcessingServiceImpl implements FlagProcessingService<Encounter> {
 
-    //@Autowired
-    private final AbnormalBloodPressurePatientFlag bloodPressurePatientFlag;
+    @Autowired
+    @Qualifier("EventBasedCalculation.AbnormalBloodPressurePatientFlag")
+    private AbnormalBloodPressurePatientFlag bloodPressurePatientFlag;
 
     public EncounterFlagProcessingServiceImpl() {
-        bloodPressurePatientFlag = new AbnormalBloodPressurePatientFlag();
+        if (this.bloodPressurePatientFlag == null) {
+            //Autowiring not working
+            this.bloodPressurePatientFlag = new AbnormalBloodPressurePatientFlag();
+        }
     }
 
 
@@ -33,11 +41,14 @@ public class EncounterFlagProcessingServiceImpl implements FlagProcessingService
     public void processFlags(Collection<Encounter> encounters) {
         Collection<Patient> patients = new ArrayList<>();
         encounters.forEach(encounter -> patients.add(encounter.getPatient()));
-        bloodPressurePatientFlag.evaluate(patients);
+        if (bloodPressurePatientFlag.isEnabled())
+            bloodPressurePatientFlag.evaluate(patients);
     }
 
     @Override
     public void processFlags(Encounter encounter) {
-        bloodPressurePatientFlag.evaluate(encounter.getPatient());
+        if (bloodPressurePatientFlag.isEnabled())
+            bloodPressurePatientFlag.evaluate(encounter.getPatient());
+
     }
 }

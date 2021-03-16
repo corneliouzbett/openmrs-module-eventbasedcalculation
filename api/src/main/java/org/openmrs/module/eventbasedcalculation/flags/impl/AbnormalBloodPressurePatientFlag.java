@@ -30,17 +30,17 @@ import java.util.Set;
  * For demonstration purposes. This blood pressure ranges aren't accurate (maybe)
  * Low blood pressure is less common
  *
- * NORMAL - less than 120 systolic(upper #) and less than 80 diastolic(Lower #)
- * ELEVATED - 120-129 systolic(upper #) and less than 80 diastolic(Lower #)
- * HYPERTENSION (Stage 1) - 130-139 systolic(upper #) or 80-89 diastolic(Lower #)
- * HYPERTENSION (Stage 2) - 140 or higher or 90 or higher
- * HYPERTENSIVE CRISIS - higher than 180 or higher than 120 diastolic(Lower #)
+ * 1. NORMAL - less than 120 systolic(upper #) and less than 80 diastolic(Lower #)
+ * 2. ELEVATED - 120-129 systolic(upper #) and less than 80 diastolic(Lower #)
+ * 3. HYPERTENSION (Stage 1) - 130-139 systolic(upper #) or 80-89 diastolic(Lower #)
+ * 4. HYPERTENSION (Stage 2) - 140 or higher or 90 or higher
+ * 5. HYPERTENSIVE CRISIS - higher than 180 or higher than 120 diastolic(Lower #)
  */
 
 @Slf4j
-@Component
 @Setter(AccessLevel.MODULE)
 @Getter(AccessLevel.MODULE)
+@Component("EventBasedCalculation.AbnormalBloodPressurePatientFlag")
 public class AbnormalBloodPressurePatientFlag extends BasePatientFlag implements OpenMrsPatientFlag<Patient> {
 
     @Override

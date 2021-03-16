@@ -6,6 +6,10 @@ import org.openmrs.Encounter;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * Process all patient flags sequentially
+ * Probably should introduce queue(s) & treat each flag as a task
+ */
 public class PatientFlagsProcessor {
 
     private PatientFlagProvider provider;

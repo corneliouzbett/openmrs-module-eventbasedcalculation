@@ -38,9 +38,8 @@ public class DeceasedPatientFlag extends BasePatientFlag implements OpenMrsPatie
 
        CalculationResultMap resultMap = calculate(calculation, patientIds);
         for (Map.Entry<Integer, CalculationResult> entry : resultMap.entrySet()) {
-            boolean value = entry.getValue().asType(Boolean.class);
-            log.info("Patient ID {} with VALUE: {}", entry.getKey(), value);
-            if (value) {
+            boolean hasThePatientDied = entry.getValue().asType(Boolean.class);
+            if (hasThePatientDied) {
                 createFlag(entry.getKey());
             }
         }
@@ -51,8 +50,9 @@ public class DeceasedPatientFlag extends BasePatientFlag implements OpenMrsPatie
         PatientService patientService = Context.getPatientService();
         Patient patient = patientService.getPatient(patientId);
         Person person = patient.getPerson();
-        log.info("Creating the patient flag... Patient is dead");
-        log.error("Patient {} {} has passed on", person.getFamilyName(), person.getGivenName());
+        // Add logic to create flag record for the specified patient
+        log.info("Creating the patient flag record");
+        log.info("Patient {} {} marked as deceased", person.getFamilyName(), person.getGivenName());
     }
 
     @Override
