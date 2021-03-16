@@ -18,6 +18,7 @@ import org.openmrs.api.context.Daemon;
 import org.openmrs.event.EventListener;
 import org.openmrs.module.DaemonToken;
 import org.openmrs.module.eventbasedcalculation.api.FlagProcessingService;
+import org.openmrs.module.eventbasedcalculation.api.impl.EncounterFlagProcessingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +31,7 @@ import javax.jms.Message;
 @NoArgsConstructor
 public class EncounterEventListener implements EventListener {
 
-    //@Autowired
+    @Autowired
     private EncounterService encounterService;
 
     private DaemonToken daemonToken;
@@ -41,12 +42,16 @@ public class EncounterEventListener implements EventListener {
     public EncounterEventListener(DaemonToken daemonToken) {
         this.daemonToken = daemonToken;
         this.encounterService = Context.getEncounterService();
+
+        if (processingService == null) {
+            this.processingService = new EncounterFlagProcessingServiceImpl();
+        }
     }
 
     @Override
     public void onMessage(Message message) {
         log.debug("Encounter event created");
-        Daemon.runInDaemonThread( () -> {
+        Daemon.runInDaemonThread(() -> {
             try {
                 processMessage(message);
             } catch (Exception exception) {

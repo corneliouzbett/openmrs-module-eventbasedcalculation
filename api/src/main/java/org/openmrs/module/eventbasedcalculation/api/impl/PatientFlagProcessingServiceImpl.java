@@ -17,7 +17,7 @@ public class PatientFlagProcessingServiceImpl implements FlagProcessingService<P
     private DeceasedPatientFlag deceasedPatientFlag;
 
     public PatientFlagProcessingServiceImpl() {
-        // Todo
+        // TODO
         // @Autowired not wiring
         this.deceasedPatientFlag = new DeceasedPatientFlag();
     }

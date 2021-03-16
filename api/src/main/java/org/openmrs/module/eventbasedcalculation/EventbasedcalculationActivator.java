@@ -44,7 +44,7 @@ public class EventbasedcalculationActivator extends BaseModuleActivator implemen
 	 */
 	@Override
 	public void started() {
-		log.info("Started Event based calculation");
+		log.info("Started Event based calculation module");
 		encounterEventListener = new EncounterEventListener(daemonToken);
 		patientEventListener = new PatientEventListener(daemonToken);
 

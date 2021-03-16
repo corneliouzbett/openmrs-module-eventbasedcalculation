@@ -11,7 +11,6 @@ import org.openmrs.api.context.Context;
 import org.openmrs.calculation.patient.PatientCalculation;
 import org.openmrs.calculation.result.CalculationResult;
 import org.openmrs.calculation.result.CalculationResultMap;
-import org.openmrs.module.eventbasedcalculation.api.calculations.CalculationsProvider;
 import org.openmrs.module.eventbasedcalculation.api.calculations.DeceasedPatientCalculation;
 import org.openmrs.module.eventbasedcalculation.flags.OpenMrsPatientFlag;
 import org.springframework.stereotype.Component;
@@ -20,19 +19,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Component
-@Setter(AccessLevel.PUBLIC)
-@Getter(AccessLevel.PUBLIC)
+@Setter(AccessLevel.MODULE)
+@Getter(AccessLevel.MODULE)
 public class DeceasedPatientFlag extends BasePatientFlag implements OpenMrsPatientFlag<Patient> {
-
-    protected boolean isEnabled;
-
-    protected String display = "";
-
-    protected String name = "Deceased patient flag";
 
     @Override
     public void evaluate(Patient patient) {
@@ -41,11 +33,10 @@ public class DeceasedPatientFlag extends BasePatientFlag implements OpenMrsPatie
 
     @Override
     public void evaluate(Collection<Patient> patients) {
-        PatientCalculation calculation = (PatientCalculation) new CalculationsProvider().getCalculation(
-                DeceasedPatientCalculation.class.getSimpleName(), null);
-        Set<Integer> patientIds = patients.stream().map(Patient::getPatientId).collect(Collectors.toSet());
+        PatientCalculation calculation = getCalculation(DeceasedPatientCalculation.class);
+        Set<Integer> patientIds = getPatientIds(patients);
 
-       CalculationResultMap resultMap = calculate(calculation, patientIds, null);
+       CalculationResultMap resultMap = calculate(calculation, patientIds);
         for (Map.Entry<Integer, CalculationResult> entry : resultMap.entrySet()) {
             boolean value = entry.getValue().asType(Boolean.class);
             log.info("Patient ID {} with VALUE: {}", entry.getKey(), value);
@@ -67,5 +58,20 @@ public class DeceasedPatientFlag extends BasePatientFlag implements OpenMrsPatie
     @Override
     public void createFlag(Collection<Integer> cohort) {
         cohort.forEach(this::createFlag);
+    }
+
+    @Override
+    public String getName() {
+        return null;
+    }
+
+    @Override
+    public String getDisplay() {
+        return null;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
     }
 }
