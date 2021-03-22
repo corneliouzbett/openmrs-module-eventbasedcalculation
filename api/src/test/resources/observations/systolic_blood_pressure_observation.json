@@ -1,0 +1,98 @@
+{
+  "resourceType": "Observation",
+  "id": "fab46dd2-2a03-411d-ad1b-d3b19373d251",
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><table class=\"hapiPropertyTable\"><tbody><tr><td>Id:</td><td>fab46dd2-2a03-411d-ad1b-d3b19373d251</td></tr><tr><td>Status:</td><td>FINAL</td></tr><tr><td>Category:</td><td> Exam </td></tr><tr><td>Code:</td><td> SYSTOLIC </td></tr><tr><td>Subject:</td><td><a href=\"http://localhost:8080/openmrs/ws/fhir2/R4/Patient/8673ee4f-e2ab-4077-ba55-4980f408773e\">John Wilson (Old Identification Number: 100GEJ)</a></td></tr><tr><td>Encounter:</td><td><a href=\"http://localhost:8080/openmrs/ws/fhir2/R4/Encounter/07a600da-cdf0-4665-ad07-08e083c9eaea\">Encounter/07a600da-cdf0-4665-ad07-08e083c9eaea</a></td></tr><tr><td>Effective:</td><td> 08 December 2020 05:34:42 </td></tr><tr><td>Issued:</td><td>08/12/2020 05:34:43 AM</td></tr><tr><td>Value:</td><td>125.0 mmHg </td></tr><tr><td>Reference Ranges:</td><td><table class=\"subPropertyTable\"><tbody><tr><th>-</th><th>Low</th><th>High</th><th>Type</th><th>Applies To</th><th>Age</th></tr><tr><td>1</td><td>100.0 </td><td>140.0 </td><td> normal </td><td/><td> - </td></tr><tr><td>2</td><td>80.0 </td><td>180.0 </td><td> treatment </td><td/><td> - </td></tr><tr><td>3</td><td>0.0 </td><td>250.0 </td><td> absolute </td><td/><td> - </td></tr></tbody></table></td></tr></tbody></table></div>"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "exam",
+          "display": "Exam"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "code": "5085AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "display": "SYSTOLIC"
+      },
+      {
+        "system": "http://loinc.org",
+        "code": "8480-6",
+        "display": "SYSTOLIC"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/8673ee4f-e2ab-4077-ba55-4980f408773e",
+    "type": "Patient",
+    "display": "John Wilson (Old Identification Number: 100GEJ)"
+  },
+  "encounter": {
+    "reference": "Encounter/07a600da-cdf0-4665-ad07-08e083c9eaea",
+    "type": "Encounter"
+  },
+  "effectiveDateTime": "2020-12-08T05:34:42+00:00",
+  "issued": "2020-12-08T05:34:43.000+00:00",
+  "valueQuantity": {
+    "value": 115.0,
+    "unit": "mmHg"
+  },
+  "referenceRange": [
+    {
+      "low": {
+        "value": 100.0
+      },
+      "high": {
+        "value": 140.0
+      },
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/referencerange-meaning",
+            "code": "normal"
+          }
+        ]
+      }
+    },
+    {
+      "low": {
+        "value": 80.0
+      },
+      "high": {
+        "value": 180.0
+      },
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/referencerange-meaning",
+            "code": "treatment"
+          }
+        ]
+      }
+    },
+    {
+      "low": {
+        "value": 0.0
+      },
+      "high": {
+        "value": 250.0
+      },
+      "type": {
+        "coding": [
+          {
+            "system": "http://fhir.openmrs.org/ext/obs/reference-range",
+            "code": "absolute"
+          }
+        ]
+      }
+    }
+  ]
+}

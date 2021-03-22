@@ -32,7 +32,6 @@ public class CalculationsProvider implements CalculationProvider {
 
     @Override
     public Calculation getCalculation(String calculationName, String configuration) {
-
         if (calculationName != null) {
             Class<? extends Calculation> clazz = calculations.get(calculationName);
             if (clazz != null) {
