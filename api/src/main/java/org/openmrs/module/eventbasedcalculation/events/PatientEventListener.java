@@ -60,6 +60,7 @@ public class PatientEventListener implements EventListener {
     }
 
     private void processMessage(Message message) throws JMSException {
+        log.info("Message {}", message.toString());
         String patientUuid = ((MapMessage) message).getString("uuid");
         log.info("Updated patient uuid: {} ", patientUuid);
 

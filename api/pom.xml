@@ -31,9 +31,30 @@
         </dependency>
 
         <dependency>
-            <groupId>org.reflections</groupId>
-            <artifactId>reflections</artifactId>
-            <version>0.9.12</version>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+
+<!-- tests-->
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>serialization.xstream-api-1.9</artifactId>
+            <version>${serializationVersion}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>serialization.xstream-api-1.10</artifactId>
+            <version>${serializationVersion}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>serialization.xstream-api-2.0</artifactId>
+            <version>${serializationVersion}</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
@@ -49,4 +70,7 @@
             </plugin>
         </plugins>
     </build>
+    <properties>
+        <serializationVersion>0.2.14</serializationVersion>
+    </properties>
 </project>
