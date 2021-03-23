@@ -9,5 +9,7 @@ public interface OpenMrsPatientFlag<T extends Auditable & OpenmrsObject> extends
 
     String getDisplay();
 
+    //FhirFlag.FlagPriority getPriority();
+
     boolean isEnabled();
 }

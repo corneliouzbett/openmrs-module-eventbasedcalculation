@@ -2,6 +2,7 @@ package org.openmrs.module.eventbasedcalculation.flags.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.openmrs.Patient;
+import org.openmrs.api.AdministrationService;
 import org.openmrs.api.context.Context;
 import org.openmrs.calculation.patient.PatientCalculation;
 import org.openmrs.calculation.patient.PatientCalculationContext;
@@ -69,8 +70,11 @@ public abstract class BasePatientFlag {
         return Context.getService(PatientCalculationService.class).evaluate(cohort, calculation, calculationContext);
     }
 
-//    protected static void createFlag(FhirFlag flag) {
-//
-//    }
+    protected static AdministrationService adminService() {
+        return Context.getAdministrationService();
+    }
 
+    protected static Patient getPatient(Integer patientId) {
+        return Context.getPatientService().getPatient(patientId);
+    }
 }

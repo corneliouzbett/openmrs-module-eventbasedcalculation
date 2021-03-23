@@ -50,6 +50,11 @@
 		<defaultValue>856AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</defaultValue>
 		<description>HIV Viral Load count concept UUID</description>
 	</globalProperty>
+	<globalProperty>
+		<property>eventbasedcalculation.flag.abnormalBloodPressure</property>
+		<defaultValue>true</defaultValue>
+		<description>Enable/disable abnormal blood pressure</description>
+	</globalProperty>
 	
 </module>
 

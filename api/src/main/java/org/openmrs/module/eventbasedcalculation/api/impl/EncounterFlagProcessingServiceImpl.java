@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 @Slf4j
 @Component("EventBasedCalculation.EncounterFlagProcessingService")
@@ -41,14 +42,14 @@ public class EncounterFlagProcessingServiceImpl implements FlagProcessingService
     public void processFlags(Collection<Encounter> encounters) {
         Collection<Patient> patients = new ArrayList<>();
         encounters.forEach(encounter -> patients.add(encounter.getPatient()));
-        if (bloodPressurePatientFlag.isEnabled())
+        if (bloodPressurePatientFlag.isEnabled()) {
+            log.info("Abnormal blood pressure patient flag isEnabled");
             bloodPressurePatientFlag.evaluate(patients);
+        }
     }
 
     @Override
     public void processFlags(Encounter encounter) {
-        if (bloodPressurePatientFlag.isEnabled())
-            bloodPressurePatientFlag.evaluate(encounter.getPatient());
-
+        this.processFlags(Collections.singleton(encounter));
     }
 }
