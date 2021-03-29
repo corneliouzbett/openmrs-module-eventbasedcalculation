@@ -8,6 +8,7 @@ import org.openmrs.calculation.ConfigurableCalculation;
 import org.openmrs.calculation.InvalidCalculationException;
 import org.openmrs.module.eventbasedcalculation.api.calculations.bloodpressure.DiastolicBloodPressureCalculation;
 import org.openmrs.module.eventbasedcalculation.api.calculations.bloodpressure.SystolicBloodPressureCalculation;
+import org.openmrs.module.eventbasedcalculation.api.calculations.vitals.TemperatureCalculation;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;
@@ -19,7 +20,7 @@ public class CalculationsProvider implements CalculationProvider {
 
     /**
      * In-memory calculations store
-     * Anyway not ideally
+     * Anyway not ideally to be refactored
      * {@literal https://wiki.openmrs.org/display/docs/Calculation+Module }
      */
     private final Map<String, Class<? extends Calculation>> calculations = new HashMap<>();
@@ -28,6 +29,7 @@ public class CalculationsProvider implements CalculationProvider {
         calculations.put(DeceasedPatientCalculation.class.getSimpleName(), DeceasedPatientCalculation.class);
         calculations.put(SystolicBloodPressureCalculation.class.getSimpleName(), SystolicBloodPressureCalculation.class);
         calculations.put(DiastolicBloodPressureCalculation.class.getSimpleName(), DiastolicBloodPressureCalculation.class);
+        calculations.put(TemperatureCalculation.class.getSimpleName(), TemperatureCalculation.class);
     }
 
     @Override

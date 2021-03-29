@@ -8,4 +8,6 @@ public class EventBasedCalculationConstants {
 
     public static final String ABNORMAL_BLOOD_PRESSURE_FLAG = "eventbasedcalculation.flag.abnormalBloodPressure";
 
+    public static final String TEMPERATURE_FLAG = "eventbasedcalculation.flag.temperature";
+
 }

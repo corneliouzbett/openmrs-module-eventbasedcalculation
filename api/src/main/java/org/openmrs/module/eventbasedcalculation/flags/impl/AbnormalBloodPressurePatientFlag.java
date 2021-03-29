@@ -129,24 +129,4 @@ public class AbnormalBloodPressurePatientFlag extends BasePatientFlag implements
             }
         }
     }
-
-    boolean isInAbsoluteNumericRange(Double value, ConceptNumeric conceptNumeric) {
-        return OpenmrsUtil.isInAbsoluteNumericRange(value.floatValue(), conceptNumeric);
-    }
-
-    boolean isInCriticalNumericRange(Double value, ConceptNumeric conceptNumeric) {
-        return OpenmrsUtil.isInCriticalNumericRange(value.floatValue(), conceptNumeric);
-    }
-
-    boolean isInNormalNumericRange(Double value, ConceptNumeric conceptNumeric) {
-        return OpenmrsUtil.isInNormalNumericRange(value.floatValue(), conceptNumeric);
-    }
-
-    boolean isNumeric(Concept diastolicConcept, Concept systolicConcept) {
-        return diastolicConcept.isNumeric() && systolicConcept.isNumeric();
-    }
-
-    ConceptNumeric getConceptNumeric(Concept concept) {
-        return Context.getConceptService().getConceptNumeric(concept.getConceptId());
-    }
 }
