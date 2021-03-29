@@ -1,0 +1,99 @@
+{
+  "resourceType": "Observation",
+  "id": "bdd3ab88-1bf0-4c40-b6da-5e72eda4c1d1",
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><table class=\"hapiPropertyTable\"><tbody><tr><td>Id:</td><td>bdd3ab88-1bf0-4c40-b6da-5e72eda4c1d1</td></tr><tr><td>Status:</td><td>FINAL</td></tr><tr><td>Category:</td><td> Exam </td></tr><tr><td>Code:</td><td> Temperature (C) </td></tr><tr><td>Subject:</td><td><a href=\"http://localhost:8080/openmrs/ws/fhir2/R4/Patient/8673ee4f-e2ab-4077-ba55-4980f408773e\">John Wilson (Old Identification Number: 100GEJ)</a></td></tr><tr><td>Encounter:</td><td><a href=\"http://localhost:8080/openmrs/ws/fhir2/R4/Encounter/86512be8-e535-456f-8076-3d43c0cc6206\">Encounter/86512be8-e535-456f-8076-3d43c0cc6206</a></td></tr><tr><td>Effective:</td><td> 08 December 2020 05:31:59 </td></tr><tr><td>Issued:</td><td>08/12/2020 05:32:00 AM</td></tr><tr><td>Value:</td><td>37.5 °C </td></tr><tr><td>Reference Ranges:</td><td><table class=\"subPropertyTable\"><tbody><tr><th>-</th><th>Low</th><th>High</th><th>Type</th><th>Applies To</th><th>Age</th></tr><tr><td>1</td><td>36.0 </td><td>37.5 </td><td> normal </td><td/><td> - </td></tr><tr><td>2</td><td>35.0 </td><td>38.0 </td><td> treatment </td><td/><td> - </td></tr><tr><td>3</td><td>25.0 </td><td>43.0 </td><td> absolute </td><td/><td> - </td></tr></tbody></table></td></tr></tbody></table></div>"
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "exam",
+          "display": "Exam"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "code": "5088AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+        "display": "Temperature (C)"
+      },
+      {
+        "system": "http://loinc.org",
+        "code": "8310-5",
+        "display": "Temperature (C)"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/8673ee4f-e2ab-4077-ba55-4980f408773e",
+    "type": "Patient",
+    "display": "John Wilson (Old Identification Number: 100GEJ)"
+  },
+  "encounter": {
+    "reference": "Encounter/86512be8-e535-456f-8076-3d43c0cc6206",
+    "type": "Encounter"
+  },
+  "effectiveDateTime": "2020-12-08T05:31:59+00:00",
+  "issued": "2020-12-08T05:32:00.000+00:00",
+  "valueQuantity": {
+    "value": 37.5,
+    "unit": "°C"
+  },
+  "referenceRange": [
+    {
+      "low": {
+        "value": 36.0
+      },
+      "high": {
+        "value": 37.5
+      },
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/referencerange-meaning",
+            "code": "normal"
+          }
+        ]
+      }
+    },
+    {
+      "low": {
+        "value": 35.0
+      },
+      "high": {
+        "value": 38.0
+      },
+      "type": {
+        "coding": [
+          {
+            "system": "http://terminology.hl7.org/CodeSystem/referencerange-meaning",
+            "code": "treatment"
+          }
+        ]
+      }
+    },
+    {
+      "low": {
+        "value": 25.0
+      },
+      "high": {
+        "value": 43.0
+      },
+      "type": {
+        "coding": [
+          {
+            "system": "http://fhir.openmrs.org/ext/obs/reference-range",
+            "code": "absolute"
+          }
+        ]
+      }
+    }
+  ]
+}
+
