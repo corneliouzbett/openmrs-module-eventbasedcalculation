@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.openmrs.Encounter;
 import org.openmrs.Patient;
 import org.openmrs.module.eventbasedcalculation.api.FlagProcessingService;
+import org.openmrs.module.eventbasedcalculation.api.pathexpressions.ExpressionEvaluator;
 import org.openmrs.module.eventbasedcalculation.flags.impl.AbnormalBloodPressurePatientFlag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,10 +31,14 @@ public class EncounterFlagProcessingServiceImpl implements FlagProcessingService
     @Qualifier("EventBasedCalculation.AbnormalBloodPressurePatientFlag")
     private AbnormalBloodPressurePatientFlag bloodPressurePatientFlag;
 
+    @Autowired
+    private ExpressionEvaluator expressionEvaluator;
+
     public EncounterFlagProcessingServiceImpl() {
         if (this.bloodPressurePatientFlag == null) {
             //Autowiring not working
             this.bloodPressurePatientFlag = new AbnormalBloodPressurePatientFlag();
+            this.expressionEvaluator = new ExpressionEvaluator();
         }
     }
 

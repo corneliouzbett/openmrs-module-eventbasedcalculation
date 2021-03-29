@@ -2,6 +2,7 @@ package org.openmrs.module.eventbasedcalculation.api.calculations.shared;
 
 import org.openmrs.Concept;
 import org.openmrs.EncounterType;
+import org.openmrs.api.context.Context;
 import org.openmrs.calculation.patient.PatientCalculationContext;
 import org.openmrs.calculation.result.CalculationResultMap;
 import org.openmrs.module.eventbasedcalculation.api.calculations.util.CalculationUtils;
@@ -14,6 +15,10 @@ import java.util.Collection;
 public class Calculation {
 
     Calculation() {}
+
+    public static Concept getConceptByUuid(String uuid) {
+        return Context.getConceptService().getConceptByUuid(uuid);
+    }
 
     public static CalculationResultMap lastObs(Concept concept, Collection<Integer> cohort, PatientCalculationContext context) {
         ObsForPersonDataDefinition def = new ObsForPersonDataDefinition("last obs", TimeQualifier.LAST, concept, context.getNow(), null);
